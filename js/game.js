@@ -396,6 +396,7 @@ var ticking = false
 var lastTabFormatUpdate = 0
 var lastNaNCheck = 0
 const TAB_FORMAT_UPDATE_INTERVAL = 250
+const LIVE_TAB_FORMAT_LAYERS = ["sh"]
 const NAN_CHECK_INTERVAL = 100
 
 var interval = setInterval(function() {
@@ -424,7 +425,7 @@ var interval = setInterval(function() {
 	updateTemp();
 	updateOomps(diff);
 	updateWidth()
-	if (now - lastTabFormatUpdate >= TAB_FORMAT_UPDATE_INTERVAL) {
+	if (shouldUpdateTabFormats(now)) {
 		updateTabFormats()
 		lastTabFormatUpdate = now
 	}
@@ -439,3 +440,9 @@ var interval = setInterval(function() {
 }, 50)
 
 setInterval(function() {needCanvasUpdate = true}, 500)
+
+function shouldUpdateTabFormats(now) {
+	if (LIVE_TAB_FORMAT_LAYERS.includes(player.tab) || LIVE_TAB_FORMAT_LAYERS.includes(player.navTab))
+		return true
+	return now - lastTabFormatUpdate >= TAB_FORMAT_UPDATE_INTERVAL
+}
