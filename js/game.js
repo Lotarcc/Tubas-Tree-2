@@ -396,7 +396,7 @@ var ticking = false
 var lastTabFormatUpdate = 0
 var lastNaNCheck = 0
 const TAB_FORMAT_UPDATE_INTERVAL = 250
-const NAN_CHECK_INTERVAL = 1000
+const NAN_CHECK_INTERVAL = 100
 
 var interval = setInterval(function() {
 	if (player===undefined||tmp===undefined) return;
