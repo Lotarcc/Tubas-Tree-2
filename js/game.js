@@ -396,7 +396,7 @@ var ticking = false
 var lastTabFormatUpdate = 0
 var lastNaNCheck = 0
 const TAB_FORMAT_UPDATE_INTERVAL = 250
-const LIVE_TAB_FORMAT_LAYERS = ["sh"]
+const LIVE_TAB_FORMAT_LAYERS = ["sh", "sk", "to"]
 const NAN_CHECK_INTERVAL = 100
 
 var interval = setInterval(function() {
