@@ -393,6 +393,10 @@ function hardReset(resetOptions) {
 }
 
 var ticking = false
+var lastTabFormatUpdate = 0
+var lastNaNCheck = 0
+const TAB_FORMAT_UPDATE_INTERVAL = 250
+const NAN_CHECK_INTERVAL = 1000
 
 var interval = setInterval(function() {
 	if (player===undefined||tmp===undefined) return;
@@ -420,9 +424,15 @@ var interval = setInterval(function() {
 	updateTemp();
 	updateOomps(diff);
 	updateWidth()
-	updateTabFormats()
+	if (now - lastTabFormatUpdate >= TAB_FORMAT_UPDATE_INTERVAL) {
+		updateTabFormats()
+		lastTabFormatUpdate = now
+	}
 	gameLoop(diff)
-	fixNaNs()
+	if (now - lastNaNCheck >= NAN_CHECK_INTERVAL) {
+		fixNaNs()
+		lastNaNCheck = now
+	}
 	adjustPopupTime(trueDiff)
 	updateParticles(trueDiff)
 	ticking = false

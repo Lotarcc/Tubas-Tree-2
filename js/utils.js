@@ -385,7 +385,7 @@ function doPopup(type = "none", text = "This is a test popup.", title = "", time
 
 //Function to reduce time on active popups
 function adjustPopupTime(diff) {
-	for (popup in activePopups) {
+	for (let popup = activePopups.length - 1; popup >= 0; popup--) {
 		activePopups[popup].time -= diff;
 		if (activePopups[popup]["time"] < 0) {
 			activePopups.splice(popup, 1); // Remove popup when time hits 0
